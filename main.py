@@ -8,6 +8,11 @@ racks: int = int((K**3)/4)
 allSwitches: int = coreSwithces+agrSwitches+egdeSitches
 allElements: int = allSwitches+racks
 
+# Build first index for each pod to connect pods to cores
+startIndex: list = []
+for i in range(K):
+    startIndex.append(i)
+
 counter = 0
 # for e in range(egdeSitches):
 #     print(f"{int(e*(K/2))}  {int(e+racks)}    1")
@@ -68,7 +73,7 @@ for i in range(allElements):
                 continue
         # compare edge with aggregation
         if i >= racks and i < racks+egdeSitches and j >= racks+egdeSitches and j < racks+egdeSitches+agrSwitches:
-            if ((i-racks) % (K/2) == (j - racks-egdeSitches) % (K/2)):
+            if ((i-racks) // (K/2) == (j - racks-egdeSitches) // (K/2)):
                 U.uPrint(i, j, True)
                 continue
             else:
@@ -76,10 +81,57 @@ for i in range(allElements):
                 continue
 
         # compare edge with core
+        if i >= racks and i < racks+egdeSitches and j < racks+egdeSitches+agrSwitches:
+            U.uPrint(i, j, False)
+            continue
+
         # compare aggregation with racks
+        if i >= racks+egdeSitches and i < racks+egdeSitches+agrSwitches and j < racks:
+            U.uPrint(i, j, False)
+            continue
         # compare aggregation with edge
+        if i >= racks+egdeSitches and i < racks+egdeSitches+agrSwitches and j >= racks and j < racks+egdeSitches:
+            if ((i - racks-egdeSitches) // (K/2)) == (j-racks) // (K/2):
+                U.uPrint(i, j, True)
+                continue
+            else:
+                U.uPrint(i, j, False)
+                continue
         # compare aggregation with core
-        # compare core with racks and edge
-        # compare core with aggregation
-        # compare core with core
-# یک تابع برای پرینت و یکی هم برای نوشتن در فایل بنویس
+        if i >= racks+egdeSitches and i < racks+egdeSitches+agrSwitches and j >= racks+egdeSitches + agrSwitches:
+            coreNumber = j-racks-egdeSitches-agrSwitches
+            podNumber: int = int((i - racks-egdeSitches) // (K/2))
+            if coreNumber == podNumber + startIndex[podNumber]:
+                U.uPrint(i, j, True)
+                startIndex[podNumber] += 1
+                startIndex[podNumber] = startIndex[podNumber] % 4
+                continue
+            else:
+                U.uPrint(i, j, False)
+                continue
+
+            # compare core with racks and edge
+            if i >= racks+egdeSitches + agrSwitches and j < racks+egdeSitches:
+                U.uPrint(i, j, False)
+                continue
+            # compare core with aggregation
+            if i >= racks+egdeSitches + agrSwitches and j >= racks+egdeSitches and j < racks+egdeSitches+agrSwitches:
+                coreNumber = i-racks-egdeSitches-agrSwitches
+                podNumber = int((j - racks-egdeSitches) // (K/2))
+                if coreNumber == podNumber + startIndex[podNumber]:
+                    U.uPrint(i, j, True)
+                    startIndex[podNumber] += 1
+                    startIndex[podNumber] = startIndex[podNumber] % 4
+                    continue
+                else:
+                    U.uPrint(i, j, False)
+                    continue
+                # compare core with core
+            if i >= racks+egdeSitches + agrSwitches and j >= racks+egdeSitches + agrSwitches:
+                if i == j:
+                    U.uPrint(i, j, True)
+                    continue
+                else:
+                    U.uPrint(i, j, False)
+                    continue
+            # یک تابع برای پرینت و یکی هم برای نوشتن در فایل بنویس
