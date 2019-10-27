@@ -1,3 +1,4 @@
+# this is an object oriented way but is not completed
 class Switch:
     # class level attributes
     #firstOutput: Switch = Switch(10)
