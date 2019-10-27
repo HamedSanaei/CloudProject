@@ -16,7 +16,7 @@ for i in range(K):
 # Build a condition for every agr switch to connect to cord
 maxLimitOfAgrToCores: list = []
 for i in range(agrSwitches):
-    startIndex.append(0)
+    maxLimitOfAgrToCores.append(0)
 
 
 counter = 0
@@ -107,12 +107,15 @@ for i in range(allElements):
         if i >= racks+egdeSitches and i < racks+egdeSitches+agrSwitches and j >= racks+egdeSitches + agrSwitches:
             coreNumber = j-racks-egdeSitches-agrSwitches
             podNumber: int = int((i - racks-egdeSitches) // (K/2))
-            if coreNumber == podNumber + startIndex[podNumber] and maxLimitOfAgrToCores[coreNumber] < K//2:
-                U.uPrint(i, j, True)
-                U.uPrint(j, i, True)
+            agrNumber: int = int(i-racks-egdeSitches)
+           # if coreNumber == podNumber + startIndex[podNumber] and maxLimitOfAgrToCores[agrNumber] < K//2:
+            if maxLimitOfAgrToCores[agrNumber] < K//2:
+                z = startIndex[podNumber] + racks+egdeSitches+agrSwitches
+                U.uPrint(i, z, True)
+                U.uPrint(z, i, True)
                 startIndex[podNumber] += 1
                 startIndex[podNumber] = startIndex[podNumber] % 4
-                maxLimitOfAgrToCores[coreNumber]
+                maxLimitOfAgrToCores[agrNumber] += 1
                 continue
             else:
                 U.uPrint(i, j, False)
