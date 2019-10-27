@@ -13,6 +13,12 @@ startIndex: list = []
 for i in range(K):
     startIndex.append(i)
 
+# Build a condition for every agr switch to connect to cord
+maxLimitOfAgrToCores: list = []
+for i in range(agrSwitches):
+    startIndex.append(0)
+
+
 counter = 0
 # for e in range(egdeSitches):
 #     print(f"{int(e*(K/2))}  {int(e+racks)}    1")
@@ -101,13 +107,16 @@ for i in range(allElements):
         if i >= racks+egdeSitches and i < racks+egdeSitches+agrSwitches and j >= racks+egdeSitches + agrSwitches:
             coreNumber = j-racks-egdeSitches-agrSwitches
             podNumber: int = int((i - racks-egdeSitches) // (K/2))
-            if coreNumber == podNumber + startIndex[podNumber]:
+            if coreNumber == podNumber + startIndex[podNumber] and maxLimitOfAgrToCores[coreNumber] < K//2:
                 U.uPrint(i, j, True)
+                U.uPrint(j, i, True)
                 startIndex[podNumber] += 1
                 startIndex[podNumber] = startIndex[podNumber] % 4
+                maxLimitOfAgrToCores[coreNumber]
                 continue
             else:
                 U.uPrint(i, j, False)
+                U.uPrint(j, i, False)
                 continue
 
             # compare core with racks and edge
@@ -116,16 +125,17 @@ for i in range(allElements):
                 continue
             # compare core with aggregation
             if i >= racks+egdeSitches + agrSwitches and j >= racks+egdeSitches and j < racks+egdeSitches+agrSwitches:
-                coreNumber = i-racks-egdeSitches-agrSwitches
-                podNumber = int((j - racks-egdeSitches) // (K/2))
-                if coreNumber == podNumber + startIndex[podNumber]:
-                    U.uPrint(i, j, True)
-                    startIndex[podNumber] += 1
-                    startIndex[podNumber] = startIndex[podNumber] % 4
-                    continue
-                else:
-                    U.uPrint(i, j, False)
-                    continue
+                continue
+                # coreNumber = i-racks-egdeSitches-agrSwitches
+                # podNumber = int((j - racks-egdeSitches) // (K/2))
+                # if coreNumber == podNumber + startIndex[podNumber]:
+                #     U.uPrint(i, j, True)
+                #     startIndex[podNumber] += 1
+                #     startIndex[podNumber] = startIndex[podNumber] % 4
+                #     continue
+                # else:
+                #     U.uPrint(i, j, False)
+                #     continue
                 # compare core with core
             if i >= racks+egdeSitches + agrSwitches and j >= racks+egdeSitches + agrSwitches:
                 if i == j:
