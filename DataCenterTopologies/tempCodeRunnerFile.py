@@ -1,1 +1,1 @@
-U.uPrint
+FatTree.createTopology()

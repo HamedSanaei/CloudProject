@@ -172,3 +172,6 @@ class FatTree:
                         continue
 
         U.writeToFile(strList)
+
+
+FatTree.createTopology()
