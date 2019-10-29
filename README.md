@@ -15,13 +15,13 @@ This a virtual topology(Fat-Tree and BCube) maker in data centers.
 We have some important topologies in datacenters such as Fat-Tree Bcube and Dcell. this app connects the servers(racks) to the switches and also switches to switches. We named the servers and swithces as the picture above. it entitled the the down-left most server to zero(0) and then go through to left step by step until reach the end of first level and give them ascending number. Then it goes to upper level and do this again. so every emelent(server and swithes) have a unique number. if there is a connection between two element it would print 1 and if there is no connection it would prints 99999. for example in fat-tree topology with (k = 4) the element with number 0 is connected to 16 so it print this:
 
 ```
-	0   16   1
+	0   16  1
 ```
 
 this code check every possible state so it writes the reverse of the above:
 
 ```
-	16 0 1
+	16  0   1
 ```
 
 A topology with N element will print out all N^2 states.
