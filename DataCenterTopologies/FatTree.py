@@ -1,4 +1,4 @@
-from Utilities import Utility as U
+from DataCenterTopologies.Utilities import Utility as U
 
 
 class FatTree:
@@ -172,6 +172,3 @@ class FatTree:
                         continue
 
         U.writeToFile(strList)
-
-
-FatTree.createTopology()

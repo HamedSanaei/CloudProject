@@ -1,5 +1,5 @@
-from Topology import Topology
-from Utilities import Utility as U
+from DataCenterTopologies.Topology import Topology
+from DataCenterTopologies.Utilities import Utility as U
 
 
 class BCube(Topology):

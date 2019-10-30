@@ -33,6 +33,3 @@ class Utility:
             with open(txtPath, 'w') as f:
                 for item in strList:
                     f.write("%s\n" % item)
-
-
-Utility.writeToFile(["hamed", "Sanaei"])

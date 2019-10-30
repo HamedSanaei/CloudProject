@@ -40,7 +40,7 @@ For BCube we have two element which are K and n . K shows levels and n is the nu
 3. Then go to the main folder of projet and run the code below on terinal or cmd:
 
    ```
-        python main.py:
+    python main.py:
    ```
 
 4. It print out the output in terminal and a file (Print.tx).
