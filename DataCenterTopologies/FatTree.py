@@ -124,9 +124,10 @@ class FatTree:
                     coreNumber = j-racks-egdeSitches-agrSwitches
                     podNumber: int = int((i - racks-egdeSitches) // (K/2))
                     agrNumber: int = int(i-racks-egdeSitches)
+                    z = startIndex[podNumber]+racks+egdeSitches+agrSwitches
+
                     # if coreNumber == podNumber + startIndex[podNumber] and maxLimitOfAgrToCores[agrNumber] < K//2:
-                    if maxLimitOfAgrToCores[agrNumber] < K//2:
-                        z = startIndex[podNumber]+racks+egdeSitches+agrSwitches
+                    if z == j and maxLimitOfAgrToCores[agrNumber] < K//2:
                         U.uPrint(i, z, True)
                         strList.append(U.uText(i, z, True))
                         U.uPrint(z, i, True)
